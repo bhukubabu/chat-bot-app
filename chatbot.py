@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import streamlit as st
 import time
+import os
 import random
 from googletrans import Translator
 
@@ -10,7 +11,7 @@ context={
 }
 st.title("AI-Powered safetybot")
 translator=Translator()
-genai.configure(api_key='AIzaSyChMO-Fy3iGMGm89meke4d-P5ebcG_sX0Q')
+genai.configure(api_key=os.environ["api_key"])
 generation_config={
     "temperature": 2,
     "max_output_tokens": 800,
