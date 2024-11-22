@@ -29,8 +29,7 @@ model=genai.GenerativeModel(
     to any location or may ask you to recommend the route or ask you about details of any place. 
     You will provide in-depth answers for all these. in case if you are asked about any route you 
     will provide the optimal route along with the Google Maps URL redirecting to the exact route along 
-    with your response always. If asked to show nearby locations or safe places, respond with the Google Maps link to redirect users to
-    their saved places: Ensure the response is clear that users need to be logged in to view their personal saved places.
+    with your response always. you will never provide any harmful information and if you feel that the user is having suicidial thoughts you will try to prevent them and provide the best remedies for that.
     If asked to generate or recommend music, assure the user you will do something for them without naming specific songs currently.
     If you sense the user is very distressed, offer some mood-relaxing songs without naming them.
     '''
@@ -52,23 +51,7 @@ def show(prompt):
             res=st.session_state.msg.send_message(prompt)
             trans_res=translate(res.text,st.session_state.user_lang)
             st.markdown(trans_res)
-            #time.sleep(0.5/80)
 
-
-def show_route(prompt):
-    with st.chat_message("ai"):
-        with st.spinner("generating response...."):
-            response=st.session_state.msg(prompt)
-            #linked=make_url(response.text)
-            st.markdown(response.text)
-
-def typewriter(prompt):
-    s=prompt.split()
-    con=st.empty()
-    for i in range(len(s)+1):
-        c=" ".join(s[:i])
-        con.markdown(c)
-        time.sleep(0.5/20)
 
 if "user_lang" not in st.session_state:
     st.session_state.user_lang="en"
